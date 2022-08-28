@@ -11,3 +11,4 @@ for test_case in range(1, T+1):
         for j in range(S, E+1):
             sols[j] = q
     print(f'#{test_case}', *sols[1:])
+

@@ -16,9 +16,9 @@ for n in range(N):
     y, x = map(int, input().split())
     stach(x, y)
 
+for i in range(100):
+    for j in range(100):
+        if arr[i][j] == 1:
+            cnt += 1
 
- for i in range(10):
-     for j in range(10):
-         if arr[i][j] == 1:
-             cnt += 1
- print(cnt)
+print(cnt)

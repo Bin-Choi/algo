@@ -10,7 +10,7 @@ for test_case in range(1, T+1):
     j = int(0)
     while j < N:
         for i in range(len(lis)):           #최대값 & idx 찾기
-            if lis[i] > max_cost:
+            if lis[i] >= max_cost:
                 max_cost = lis[i]
                 sellday = i
 

@@ -2,7 +2,7 @@ import sys
 sys.stdin = open("input.txt", "r")
 
 
-def change(i, j):
+def change(i, j):                                   # 좌표값을 절대값으로 변경
     if i == 1:
         a = j
     elif i == 2:
