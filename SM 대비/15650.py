@@ -1,21 +1,22 @@
-# N과 M
 import sys
 sys.stdin = open("input.txt", "r")
 
-N, M = list(map(int, input().split()))
-
+N, M = map(int, input().split())
 s = []
 
-# N = 4 , M = 3 이라고 놓고 푼다?
-def dfs():
-    if len(s) == 3:
+
+def dfs(s):
+
+    if len(s) == M:
         print(' '.join(map(str, s)))
         return
 
-    for i in range(1, 4+1):
+    for i in range(s, N+1):
         if i not in s:
             s.append(i)
-            dfs()
+            dfs(i+1)
             s.pop()
 
-dfs()
+
+dfs(1)
+
