@@ -3,37 +3,35 @@ from collections import deque
 sys.stdin = open("input.txt", "r")
 
 Time = int(input())
-r = 0
 for _ in range(Time):
     p = sys.stdin.readline().rstrip()
-    n = int(input())
-    arr = sys.stdin.readline().rstrip()[1:-1].split(',')
-    q = deque(arr)
-    r = 0
-    if n == 0:
-        q = []
+    n = int(sys.stdin.readline())
+    q = deque(sys.stdin.readline().rstrip()[1:-1].split(","))
 
-    for c in p:
-        e = 0
-        if c == 'R':
-            if q:
-                r += 1
-            else:
+    if '' in q:
+        q.pop()
+
+    r = 0
+    e = 0
+
+    for cmd in p:
+        if cmd == "R":
+            r += 1
+        else:
+            if len(q) < 1:
                 e = 1
-        elif c == 'D':
-            if q:
+                break
+            else:
                 if r % 2 == 0:
                     q.popleft()
                 else:
                     q.pop()
-            else:
-                e = 1
+
     if e == 1:
         print('error')
-
     else:
         if r % 2 == 0:
-            print(q)
+            print("["+",".join(q)+"]")
         else:
-            q = q.reverse()
-            print(q)
+            q.reverse()
+            print("["+",".join(q)+"]")
