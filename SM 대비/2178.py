@@ -22,6 +22,7 @@ def bfs(x, y):
 
     return Map[n-1][m-1]
 
+
 n, m = map(int, input().split())
 Map = [list(map(int, input().rstrip())) for _ in range(n)]
 
