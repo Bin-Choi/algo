@@ -2,31 +2,24 @@ import sys
 from collections import deque
 sys.stdin = open("input.txt", "r")
 
+input = sys.stdin.readline
 
-def bfs(a, b):
-    q = deque()
-    q.append(a)
-    goal = b
-    visited[a] = 1
-    cnt = 0
+N, K = map(int, input().split())
+road = [0] * 100001
 
-    while q:
-        x = q.popleft()
-
-        if x == goal:
-            return visited[x]-1
-
-        for nx in (2*x, x-1, x+1):
-            if 0 <= nx <= 10000 and not visited[nx]:
-                if nx == 2*x:
-                    q.appendleft(nx)
-                    visited[nx] = visited[x]
-                else:
-                    cnt += 1
-                    q.append(nx)
-                    visited[nx] = visited[x]+1
-
-
-N, M = map(int, input().split())
-visited = [0] * 100000
-print(bfs(N, M))
+q = deque()
+q.append(N)
+road[N] = 1
+while q:
+    x = q.popleft()
+    if x == K:
+        print(road[x]-1)
+        break
+    for nx in (2*x, x-1, x+1):
+        if 100001 > nx >= 0 == road[nx]:
+            if nx == 2*x:
+                road[nx] = road[x]
+                q.appendleft(nx)
+            else:
+                road[nx] = road[x] + 1
+                q.append(nx)
