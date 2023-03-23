@@ -2,7 +2,7 @@ from collections import deque
 import sys
 
 sys.stdin = open("input.txt", "r")
-input = stdin.readline
+
 q = deque()
 
 n, m, k = map(int, input().split())
