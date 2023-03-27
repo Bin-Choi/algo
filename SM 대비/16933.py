@@ -4,41 +4,45 @@ input = sys.stdin.readline
 from collections import deque
 
 
-def bfs():
+def bfs(start):
     q = deque()
-    q.append((0, 0, 0))
-    vis[0][0][0] = 1
-
+    q.append(start)
+    ans = 1
+    time = True
     while q:
-        x, y, z = q.popleft()
+        for _ in range(len(q)):
+            i, j, w = q.popleft()
 
-        if x == n-1 and y == m-1:
-            return vis[x][y][z]
+            if i == n - 1 and j == m - 1:
+                print(ans)
+                return
 
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-
-            if 0 <= nx < n and 0 <= ny < m:
-                if arr[nx][ny] == 1 and z < k and vis[nx][ny][z+1] == 0:
-                    if vis[x][y][z] % 2 == 1:
-                        q.append((nx, ny, z+1))
-                        vis[nx][ny][z+1] = vis[x][y][z] + 1
+            for dy, dx in dir:
+                ni, nj = i + dy, j + dx
+                if ni < 0 or ni >= n or nj < 0 or nj >= m or visited[ni][nj] <= w:
+                    continue
+                # 벽이 아닌 경우 낮이든 밤이든 이동 가능
+                if graph[ni][nj] == '0':
+                    q.append((ni, nj, w))
+                    visited[ni][nj] = w
+                # 벽인 경우
+                elif w < k:
+                    if not time:  # 밤 인 경우
+                        q.append((i, j, w))
                     else:
-                        q.append((nx, ny, z))
-                        vis[nx][ny][z] = vis[x][y][z] + 1
-                elif arr[nx][ny] == 0 and vis[nx][ny][z] == 0:
-                    q.append((nx, ny, z))
-                    vis[nx][ny][z] = vis[x][y][z] + 1
+                        visited[ni][nj] = w
+                        q.append((ni, nj, w + 1))
+        ans += 1
+        time = not time
+    print(-1)
+    return
 
-    return -1
-
-
-dx = [0, 0, 1, -1]
-dy = [1, -1, 0, 0]
 
 n, m, k = map(int, input().split())
-arr = [list(map(int, input())) for _ in range(n)]
-vis = [[[0] * (k+1) for _ in range(m)] for _ in range(n)]
+graph = [input().rstrip() for _ in range(n)]
+visited = [[k + 1 for _ in range(m)] for _ in range(n)]
+visited[0][0] = 0
 
-print(bfs())
+dir = ((1, 0), (-1, 0), (0, 1), (0, -1))
+
+bfs((0, 0, 0))
