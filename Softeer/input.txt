@@ -1,11 +1,7 @@
-3 7
-grandeur
-avante
-sonata
-sonata 14 16
-grandeur 11 12
-avante 15 18
-sonata 10 11
-avante 9 12
-grandeur 16 18
-avante 12 15
+3 3
+50 90
+10 90
+40 50
+50 40
+10 100
+40 40
