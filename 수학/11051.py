@@ -4,28 +4,17 @@ sys.stdin = open("input.txt", "r")
 n, k = map(int, input().split())
 
 
-def bino_coef(n, k):
+result = 1
+for i in range(k):
+    result *= n
+    n -= 1
 
-    if k > n:
-        return 0
+divisior = 1
+for i in range(2, k+1):
+    divisior *= i
 
-    cache = [[-1 for _ in range(n+1)] for _ in range(n+1)]
+print((result // divisior) % 10007)
 
-    def choose(times, got):
-
-        if times == n:
-            return got == k
-
-        if cache[times][got] != -1:
-            return cache[times][got]
-
-        cache[times][got] = choose(times+1, got) + choose(times+1, got+1)
-        return cache[times][got]
-
-    return choose(0, 0)
-
-
-print(bino_coef(n, k)%10007)
 
 
 
